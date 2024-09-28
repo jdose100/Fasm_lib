@@ -585,13 +585,13 @@ macro define_JNCONDEL
 	  ja label
 	  define COND
       \\\}
-      match =COND v1==v2, COND c
+      match =COND v1~==v2, COND c
       \\\{
 	  cmp v1,v2
 	  jne label
 	  define COND
       \\\}
-      match =COND v1<>v2, COND c
+      match =COND v1==v2, COND c
       \\\{
 	  cmp v1,v2
 	  je label
@@ -909,7 +909,7 @@ macro needed [library]
 }
 define needed@dynamic
 
-macro import [name]
+macro import_unix [name]
 {
  common
   local strtab,strsz,symtab,rel,relsz,hash
@@ -982,8 +982,8 @@ macro library [name,string]
      end if
     end if }
 
-macro import name,[label,string]
- { common
+macro import_win32 name,[label,string]
+{ common
     rb (- rva $) and 7
     if defined name#.referred
      name#.lookup:
